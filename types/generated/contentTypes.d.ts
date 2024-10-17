@@ -20,6 +20,7 @@ export interface ApiMenuItemMenuItem extends Struct.CollectionTypeSchema {
       true
     > &
       Schema.Attribute.Required;
+    tag: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
