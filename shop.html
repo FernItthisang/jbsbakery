@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="main.js"></script>
+    <script src="script.js"></script>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/logo.svg" alt="Logo">
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <div class="submenu-container">
+                <a href="snackbox.html">Snackbox</a>
+                <div class="submenu">
+                    <a href="snackbox.html#price-35">ราคา 35 บาท</a>
+                    <a href="snackbox.html#price-45">ราคา 45 บาท</a>
+                    <a href="snackbox.html#price-50">ราคา 50 บาท</a>
+                    <a href="snackbox.html#price-65">ราคา 65 บาท</a>
+                    <a href="snackbox.html#price-75">ราคา 75 บาท</a>
+                    <a href="snackbox.html#custom-price">ราคาตามสั่ง</a>
+                </div> 
+            </div>
+            <a href="shop.html">Menu</a>
+            <a href="about.html">About</a>
+        </div>
+    </nav>
+    <div class="section5">
+        <div class="shop-container">
+            <h2 class="section-title">Our Special Drinks</h2>
+    
+            <!-- Tags Container -->
+            <div class="tags-container" id="tags-container">
+                <!-- Tags will be dynamically inserted here -->
+            </div>
+    
+            <!-- Product Grid -->
+            <div class="product-grid" id="product-grid">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+    
+            <!-- <button class="see-more-btn">See More</button> -->
+        </div>
+    </div>
+</body>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+        <img src="assets/logo.svg" alt="Logo">
+    </div>
+        <div class="footer-section about">
+            <p>At JB's Bakery, we bring joy to every bite with fresh,<br> quality ingredients and heartfelt service.</p>
+            <div class="contact-row">
+                <a href="mailto:info@jbsbakery.com" class="contact-icon">
+                    <img src="assets/fb.svg" alt="Email Icon" class="icon"> 
+                </a>
+                <a href="tel:+1234567890" class="contact-icon">
+                    <img src="assets/call.svg" alt="Phone Icon" class="icon">
+                </a>
+                <a href="tel:+1234567890" class="contact-icon">
+                    <img src="assets/line.svg" alt="Phone Icon" class="icon">
+                </a>
+            </div>
+            <div class="footer-section links">
+                <div class="page-row">
+                    <a href="index.html">Home</a>
+                    <a href="snackbox.html">Snackbox</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="about.html">About</a>
+            </div> 
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 JB's Bakery. All Rights Reserved.</p>
+    </div>
+</footer>  
+</html>
