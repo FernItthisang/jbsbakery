@@ -242,33 +242,27 @@ h4{
 
 /* Container styling */
 .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 360px; /* Set frame width */
+    height: 640px; /* Set frame height for 9:16 aspect ratio */
+    margin: 0 auto; /* Center the container horizontally */
+    overflow: hidden; /* Crop the video content outside the frame */
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 400px; /* Optional: Set a max width */
-    margin: 0 auto;
-    overflow: hidden;
+    background-color: black; /* Black background for better visibility */
 }
 
-/* Wrapper for cropping */
-.video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 177.78%; /* 9:16 aspect ratio */
-    overflow: hidden;
-    background-color: black; /* Optional: Ensure black background */
-}
-
-/* Responsive iframe */
+/* Iframe styling */
 .video-frame {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures video fills the area */
-    border: none;
+    width: auto; /* Let the width adjust automatically */
+    height: 100%; /* Ensure the iframe fills the height */
+    min-width: 320%; /* Ensure the iframe covers the width */
+    object-fit: cover; /* Cover the container */
+    object-position: center; /* Crop equally from both sides */
 }
-
 .section2{
     width: 100vw;
     height: 100vh;
