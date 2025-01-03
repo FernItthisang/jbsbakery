@@ -263,8 +263,6 @@ h4{
 /* Responsive iframe */
 .video-frame {
     position: absolute;
-    top: 0;
-    transform: translateX(-50%);
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ensures video fills the area */
