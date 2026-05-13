@@ -1,191 +1,1221 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JB's Bakery</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sriracha">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mali">
-    <script src="js/script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JB's Bakery — ขนมปังเพื่อสุขภาพ</title>
+<link href="https://fonts.googleapis.com/css2?family=Canela:wght@300;400&family=Instrument+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --moss:    #3D5A3E;
+  --forest:  #2B3F2C;
+  --sage:    #7A9E7E;
+  --mint:    #C8DFC9;
+  --cream:   #F5F0E8;
+  --oat:     #EDE5D4;
+  --wheat:   #D4BF99;
+  --brown:   #8B6842;
+  --espresso:#2C1E0F;
+  --sand:    #F9F5EE;
+  --text:    #1A2B1B;
+  --muted:   #5A7060;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--sand);
+  color: var(--text);
+  overflow-x: hidden;
+  font-weight: 300;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 3.5rem;
+  transition: all 0.4s;
+}
+nav.scrolled {
+  background: rgba(245,240,232,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(61,90,62,0.1);
+}
+.logo {
+  display: flex; align-items: center; gap: 0.75rem;
+  text-decoration: none;
+}
+.logo-icon {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--moss);
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-icon svg { width: 20px; height: 20px; }
+.logo-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--forest);
+  letter-spacing: 0.01em;
+}
+.logo-text span {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+  margin-top: -2px;
+}
+.nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem; letter-spacing: 0.08em;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--moss); }
+.nav-btn {
+  background: var(--moss); color: #fff !important;
+  padding: 0.6rem 1.4rem;
+  border-radius: 100px;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  transition: background 0.2s, transform 0.2s !important;
+}
+.nav-btn:hover { background: var(--forest) !important; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 10rem 5rem 6rem 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--mint);
+  color: var(--forest);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  width: fit-content;
+}
+.tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--moss); }
+.hero-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--forest);
+  margin-bottom: 1.8rem;
+}
+.hero-title em { font-style: italic; color: var(--moss); }
+.hero-sub {
+  font-size: 1rem; line-height: 1.85; color: var(--muted);
+  max-width: 420px; margin-bottom: 2.5rem; font-weight: 300;
+}
+.hero-actions { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--moss); color: #fff;
+  padding: 0.9rem 2rem;
+  border-radius: 100px;
+  font-size: 0.85rem; font-weight: 500;
+  text-decoration: none; display: inline-block;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--forest); transform: translateY(-2px); }
+.btn-outline {
+  border: 1.5px solid var(--sage); color: var(--moss);
+  padding: 0.9rem 2rem; border-radius: 100px;
+  font-size: 0.85rem; font-weight: 400;
+  text-decoration: none; display: inline-block;
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: var(--moss); color: #fff; border-color: var(--moss); }
+
+.hero-badges {
+  display: flex; gap: 1.5rem;
+  margin-top: 3.5rem; padding-top: 3rem;
+  border-top: 1px solid rgba(61,90,62,0.12);
+}
+.badge-item { display: flex; align-items: center; gap: 0.6rem; }
+.badge-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--mint);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.badge-text { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+.badge-text strong { display: block; color: var(--forest); font-weight: 500; font-size: 0.82rem; }
+
+/* Hero right */
+.hero-right {
+  background: var(--moss);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-right::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 70%, rgba(200,223,201,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(43,63,44,0.5) 0%, transparent 50%);
+}
+.hero-visual { position: relative; z-index: 2; }
+.hero-bread-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  width: 280px;
+}
+.bread-svg-wrap { margin-bottom: 1.5rem; }
+.bread-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem; font-weight: 300;
+  color: #fff; margin-bottom: 0.4rem;
+}
+.bread-cal {
+  font-size: 0.75rem; letter-spacing: 0.1em;
+  color: rgba(200,223,201,0.7); text-transform: uppercase;
+}
+.nutrition-chips {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  justify-content: center; margin-top: 1.2rem;
+}
+.chip {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  padding: 0.3rem 0.7rem; border-radius: 100px;
+  font-size: 0.68rem; letter-spacing: 0.08em;
+}
+.floating-pill {
+  position: absolute;
+  background: #fff; border-radius: 100px;
+  padding: 0.6rem 1.1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.75rem; font-weight: 500;
+  color: var(--forest);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+.fp1 { top: 20%; left: -30px; animation: float1 4s ease-in-out infinite; }
+.fp2 { bottom: 22%; right: -20px; animation: float2 5s ease-in-out infinite; }
+.fp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--moss); }
+@keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes float2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  background: var(--forest); padding: 0.9rem 0; overflow: hidden;
+}
+.marquee-track {
+  display: flex; gap: 2rem; white-space: nowrap;
+  animation: marquee 25s linear infinite;
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-item {
+  display: flex; align-items: center; gap: 1.5rem;
+  font-size: 0.8rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(200,223,201,0.7);
+  flex-shrink: 0;
+}
+.marquee-item strong { color: var(--mint); font-weight: 500; }
+.m-sep { color: rgba(200,223,201,0.3); }
+
+/* ── SECTION COMMONS ── */
+.section-label {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.7rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--moss);
+  margin-bottom: 1.2rem; font-weight: 500;
+}
+.section-label::before {
+  content: ''; width: 24px; height: 2px; background: var(--moss); border-radius: 2px;
+}
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 300; line-height: 1.1;
+  color: var(--forest);
+}
+.section-title em { font-style: italic; color: var(--moss); }
+
+/* ── WHY SECTION ── */
+.why {
+  padding: 7rem 3.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: center;
+  background: var(--cream);
+}
+.why-body {
+  font-size: 0.97rem; line-height: 1.9; color: var(--muted);
+  margin-top: 1.5rem; font-weight: 300;
+}
+.why-points {
+  display: flex; flex-direction: column; gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+.why-point {
+  display: flex; gap: 1rem; align-items: flex-start;
+}
+.point-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: var(--mint); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.point-text strong {
+  display: block; font-size: 0.9rem; color: var(--forest);
+  font-weight: 500; margin-bottom: 0.2rem;
+}
+.point-text p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+/* Why right: visual grid */
+.why-visual {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.why-card {
+  background: var(--sand); border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.8rem;
+  border: 1px solid rgba(61,90,62,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(61,90,62,0.08); }
+.why-card:nth-child(2) { margin-top: 2rem; }
+.why-card:nth-child(4) { margin-top: -1.5rem; }
+.card-num {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem; font-weight: 300; color: var(--moss);
+  line-height: 1;
+}
+.card-label {
+  font-size: 0.82rem; font-weight: 500;
+  color: var(--forest);
+}
+.card-sub { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+
+/* ── PRODUCTS ── */
+.products { padding: 7rem 3.5rem; background: var(--sand); }
+.products-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 3.5rem;
+}
+.products-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.product-card {
+  border-radius: 24px; overflow: hidden;
+  border: 1px solid rgba(61,90,62,0.1);
+  background: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(61,90,62,0.1); }
+.product-img {
+  height: 200px; background: var(--mint);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.product-img.oat-bg  { background: #E8DFC8; }
+.product-img.rye-bg  { background: #D4C8B4; }
+.product-img.herb-bg { background: #C8D8C4; }
+.product-img.seed-bg { background: #DED4C0; }
+.product-img.rice-bg { background: #D8E4D4; }
+.product-badge-img {
+  position: absolute; top: 1rem; left: 1rem;
+  background: var(--moss); color: #fff;
+  font-size: 0.6rem; letter-spacing: 0.15em;
+  text-transform: uppercase; font-weight: 500;
+  padding: 0.3rem 0.7rem; border-radius: 100px;
+}
+.product-badge-new { background: var(--brown); }
+.product-body { padding: 1.5rem; }
+.product-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem; font-weight: 300;
+  color: var(--forest); margin-bottom: 0.5rem;
+}
+.product-desc {
+  font-size: 0.82rem; line-height: 1.7;
+  color: var(--muted); margin-bottom: 1.2rem; font-weight: 300;
+}
+.product-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.tag {
+  background: var(--mint); color: var(--forest);
+  padding: 0.2rem 0.6rem; border-radius: 100px;
+  font-size: 0.65rem; letter-spacing: 0.08em;
+}
+.product-footer2 {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 1rem; border-top: 1px solid rgba(61,90,62,0.08);
+}
+.product-price { font-family: 'Fraunces', serif; font-size: 1.2rem; color: var(--forest); }
+.product-price span { font-size: 0.7rem; color: var(--muted); font-family: inherit; }
+.add-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--moss); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.add-btn:hover { background: var(--forest); transform: scale(1.1); }
+.add-btn svg { width: 16px; height: 16px; }
+
+/* ── INGREDIENT BANNER ── */
+.ingredient-banner {
+  background: var(--forest);
+  padding: 5rem 3.5rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.ib-label { color: rgba(200,223,201,0.7) !important; }
+.ib-label::before { background: rgba(200,223,201,0.5) !important; }
+.ib-title { color: var(--mint) !important; }
+.ib-title em { color: #fff !important; }
+.ib-body { font-size: 0.95rem; line-height: 1.9; color: rgba(200,223,201,0.65); margin-top: 1.2rem; }
+.ingredient-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: rgba(255,255,255,0.06);
+  border-radius: 16px; overflow: hidden;
+}
+.ing-item {
+  background: rgba(255,255,255,0.04);
+  padding: 1.6rem; display: flex; align-items: center; gap: 1rem;
+  transition: background 0.2s;
+}
+.ing-item:hover { background: rgba(255,255,255,0.08); }
+.ing-emoji { font-size: 1.6rem; }
+.ing-name { font-size: 0.85rem; color: #fff; font-weight: 400; }
+.ing-sub { font-size: 0.73rem; color: rgba(200,223,201,0.5); margin-top: 0.1rem; }
+
+/* ── HOW TO ORDER ── */
+.order-section { padding: 7rem 3.5rem; background: var(--oat); }
+.order-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+  margin-top: 3.5rem;
+}
+.order-steps { display: flex; flex-direction: column; gap: 2rem; }
+.order-step { display: flex; gap: 1.5rem; }
+.step-circle {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--moss); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem; font-weight: 300;
+  flex-shrink: 0; margin-top: 0.1rem;
+}
+.step-content strong {
+  display: block; font-size: 0.95rem; font-weight: 500;
+  color: var(--forest); margin-bottom: 0.4rem;
+}
+.step-content p { font-size: 0.83rem; line-height: 1.7; color: var(--muted); }
+
+/* Order form */
+.order-form-wrap {
+  background: #fff; border-radius: 24px; padding: 2.5rem;
+  border: 1px solid rgba(61,90,62,0.08);
+}
+.form-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem; font-weight: 300; color: var(--forest);
+  margin-bottom: 1.5rem;
+}
+.form-field { margin-bottom: 1rem; }
+.form-field label {
+  display: block; font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%; padding: 0.8rem 1rem;
+  border: 1.5px solid rgba(61,90,62,0.15);
+  border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem; color: var(--text); font-weight: 300;
+  outline: none; background: var(--sand);
+  transition: border-color 0.2s, background 0.2s;
+  appearance: none;
+}
+.form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A7060' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus { border-color: var(--moss); background: #fff; }
+.form-field textarea { resize: none; height: 80px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.form-submit-btn {
+  width: 100%; background: var(--moss); color: #fff;
+  border: none; padding: 1rem;
+  border-radius: 100px; cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 0.5rem;
+}
+.form-submit-btn:hover { background: var(--forest); transform: translateY(-1px); }
+.line-contact {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 0.8rem; color: var(--muted);
+  margin-top: 1rem; justify-content: center;
+}
+.line-badge {
+  background: #06C755; color: #fff;
+  padding: 0.25rem 0.7rem; border-radius: 100px;
+  font-size: 0.7rem; font-weight: 500;
+}
+
+/* ── REVIEWS ── */
+.reviews { padding: 7rem 3.5rem; background: var(--sand); }
+.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.review-card {
+  background: var(--cream); border-radius: 20px; padding: 2rem;
+  border: 1px solid rgba(61,90,62,0.07);
+}
+.stars { color: #F0A500; font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+.review-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic; font-size: 1rem;
+  line-height: 1.7; color: var(--forest);
+  margin-bottom: 1.5rem;
+}
+.reviewer { display: flex; align-items: center; gap: 0.8rem; }
+.reviewer-av {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 500;
+}
+.av-a { background: var(--mint); color: var(--forest); }
+.av-b { background: #FFE8D4; color: #8B4513; }
+.av-c { background: #E8E0FF; color: #4B0082; }
+.reviewer-name { font-size: 0.85rem; font-weight: 500; color: var(--forest); }
+.reviewer-loc { font-size: 0.73rem; color: var(--muted); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--espresso);
+  padding: 4rem 3.5rem 2rem;
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand-logo {
+  display: flex; align-items: center; gap: 0.75rem;
+  text-decoration: none; margin-bottom: 1rem;
+}
+.footer-brand-logo .logo-icon { background: var(--sage); }
+.footer-brand-logo .logo-text { color: var(--mint); }
+.footer-brand-logo .logo-text span { color: rgba(200,223,201,0.5); }
+.footer-tagline { font-size: 0.85rem; line-height: 1.7; color: rgba(200,223,201,0.45); max-width: 260px; font-weight: 300; }
+.footer-social { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+.social-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(200,223,201,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(200,223,201,0.5); text-decoration: none;
+  font-size: 0.75rem; font-weight: 500;
+  transition: all 0.2s;
+}
+.social-btn:hover { border-color: var(--sage); color: var(--mint); }
+.footer-col h4 {
+  font-size: 0.7rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--sage);
+  margin-bottom: 1.2rem; font-weight: 500;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-col ul li a {
+  font-size: 0.83rem; color: rgba(200,223,201,0.4);
+  text-decoration: none; font-weight: 300;
+  transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: var(--mint); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 2rem;
+}
+.footer-bottom p { font-size: 0.75rem; color: rgba(200,223,201,0.2); font-weight: 300; }
+
+/* ── ANIMATION ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero, .why, .ingredient-banner, .order-grid, .footer-grid { grid-template-columns: 1fr; }
+  .hero-left { padding: 8rem 1.5rem 3rem; }
+  .hero-right { min-height: 320px; }
+  .products-grid, .reviews-grid { grid-template-columns: 1fr; }
+  .why, .products, .ingredient-banner, .order-section, .reviews { padding: 4rem 1.5rem; }
+}
+</style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="hamburger-menu">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-                <li class="nav-item"><a href="snackbox.html" class="nav-link">Snackbox</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="section1">
-        <!-- Main Logo -->
-        <div class="logo-container">
-            <img src="assets/name.svg" alt="logo">
-        </div>
-        
-        <!-- Tag Container -->
-        <div class="tag-container">
-            <div class="slogan-container">
-                <h1 class="thai-slogan">เบเกอรี่โฮมเมด<br>
-                    ที่คุณต้องหลงรัก</h1>
-            </div>
-            
-            <div class="arrow-container">
-                <img src="assets/arrow.svg" alt="arrow">
-            </div>
-            
-            <div class="hand-container">
-                <img src="assets/hand.png" alt="hand">
-            </div>
-        </div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
+        <path d="M6 20c0-4.4 2.7-8 6-8s6 3.6 6 8"/>
+        <path d="M12 12V7"/>
+        <path d="M9 9.5C9 7.6 10.3 6 12 6s3 1.6 3 3.5"/>
+        <circle cx="12" cy="5" r="1.5" fill="#fff" stroke="none"/>
+      </svg>
     </div>
-    <div class="section2">
-        <div class="section2-content">  
-            <div class="section2-tag">
-                <div class="name2-container">
-                    <h1>ที่</h1><img src="assets/name2.svg" alt="logo">
-                </div>
-            </div>
-            
-            <div class="section2-content-container">
-                <div class="image-placeholder">
-                    <img src="assets/placeholder.png" alt="image">
-                    <img src="assets/snowbun1.png" alt="image">
-                    <img src="assets/snowbun2.png" alt="image">
-                    <img src="assets/snowbun3.png" alt="image">
-                    <img src="assets/snowbun4.png" alt="image">
-                    <img src="assets/snowbun5.png" alt="image">
-                    <img src="assets/snowbun6.png" alt="image">
-
-                </div>
-                <div class="section2-container">
-                    <h1>เบเกอรี่สดใหม่ทุกวัน</h1>
-                    <div class="section2-paragraph">
-                        <p>"<span>JB's Bakery</span>อยากส่งต่อขนมเบเกอรี่นุ่มๆ อบใหม่ทุกวัน ด้วยวัตถุดิบเกรดพรีเมี่ยม คัดสรรอย่างพิถีพิถันในทุกขั้นตอน มีเมนูหลากหลายให้เลือก ทั้งเค้ก ขนมปัง และของหวานอื่นๆ ที่อบจากเตาทุกเช้า กลิ่นหอมอบอวลชวนให้หลงรัก ลองแล้วคุณจะติดใจทุกคำ เหมือนได้รับความสุขเล็กๆ กลับไปทุกครั้ง"</p>
-                </p>
-                    </div>
-                    <div class="section2-button">
-                        <a href="menu.html">
-                            <button>ดูเพิ่มเติม</button>
-                        </a>
-                    </div>
-            </div>
-                </div>
-        </div>
+    <div class="logo-text">
+      JB's Bakery
+      <span>Healthy Bread</span>
     </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">เมนู</a></li>
+    <li><a href="#ingredients">วัตถุดิบ</a></li>
+    <li><a href="#reviews">รีวิว</a></li>
+    <li><a href="#order" class="nav-btn">สั่งเลย</a></li>
+  </ul>
+</nav>
 
-    <div class="section3">
-        <div class="section3-content">
-            <div class="section3-tag">
-                <h1>เมนูแนะนำ</h1>
-                <div class="name2-container">
-                    <h1>ที่</h1><img src="assets/name.svg" alt="logo">
-                </div>
-            </div>
-                <div class="section3-paragraph">
-                    <p>ขนมปัง Snowbun สีขาวนุ่มๆ ที่ทางร้านคิดขึ้นเอง</p>
-                </div>
-                <div class="section3-content-container">
-                    <div class="image-track">
-                        <img src="assets/snowbun1.png" alt="image">
-                        <img src="assets/snowbun2.png" alt="image">
-                        <img src="assets/snowbun3.png" alt="image">
-                        <img src="assets/snowbun4.png" alt="image">
-                        <img src="assets/snowbun5.png" alt="image">
-                        <img src="assets/snowbun6.png" alt="image">
-                    </div>
-
-                    <div class="image-track">
-                        <img src="assets/snowbun1.png" alt="image">
-                        <img src="assets/snowbun2.png" alt="image">
-                        <img src="assets/snowbun3.png" alt="image">
-                        <img src="assets/snowbun4.png" alt="image">
-                        <img src="assets/snowbun5.png" alt="image">
-                        <img src="assets/snowbun6.png" alt="image">
-
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><span class="tag-dot"></span>Healthy Artisan Bread · นนทบุรี</div>
+    <h1 class="hero-title">
+      ขนมปัง<br>
+      <em>เพื่อสุขภาพ</em><br>
+      ที่อร่อยจริง
+    </h1>
+    <p class="hero-sub">
+      ขนมปังโฮมเมดจากแป้งธัญพืชเต็มเมล็ด ไม่ใส่สารกันบูด ไม่ใส่นมข้นหวาน หมักธรรมชาติ เหมาะสำหรับคนที่รักสุขภาพแต่ยังอยากอร่อย
+    </p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">ดูเมนูทั้งหมด</a>
+      <a href="https://www.facebook.com/jbsbakeryy" target="_blank" class="btn-outline">Facebook ร้าน</a>
     </div>
-    <div class="section4">
-        <div class="section4-content">  
-            <div class="section4-tag">
-                <div class="name2-container">
-                    <h1>ที่</h1><img src="assets/name2.svg" alt="logo">
-                </div>
-            </div>
-            <div class="section4-content-container">
-                <div class="section4-container">
-                    <h1>รับทำขนมจัดเบรค<br>และชุดอาหารว่าง</h1>
-                    <div class="section4-paragraph">
-                        <p>"ให้เราเป็นคนช่วยคุณทำขนมจัดเบรคและชุดอาหารว่างในงานสำคัญของคุณ ด้วยวัตถุดิบสดใหม่ คุณภาพพรีเมี่ยม
-                        ราคาเริ่มต้นที่ 35 บาท หรือตามงบของคุณได้"</p>                   </div>
-                    <div class="section2-button">
-                        <a href="snackbox.html">
-                            <button>ดูเพิ่มเติม</button>
-                        </a>                    </div>
-            </div>
-            <div class="image-placeholder2">
-                <img src="assets/snackbox-01.png" alt="image">
-                <img src="assets/snackbox-02.png" alt="image">
-                <img src="assets/snackbox-03.png" alt="image">
-                <img src="assets/snackbox-04.png" alt="image">
-            </div>
-
-        </div>
+    <div class="hero-badges">
+      <div class="badge-item">
+        <div class="badge-icon">🌾</div>
+        <div class="badge-text"><strong>Whole Grain</strong>แป้งธัญพืชเต็มเมล็ด</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-icon">🚫</div>
+        <div class="badge-text"><strong>ไม่ใส่สารกันบูด</strong>Natural Preservative-Free</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-icon">🍃</div>
+        <div class="badge-text"><strong>Low Sugar</strong>น้ำตาลต่ำ</div>
+      </div>
     </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <!-- Floating pills -->
+      <div class="floating-pill fp1">
+        <div class="fp-dot"></div> ไม่ใส่สารกันบูด
+      </div>
+      <div class="floating-pill fp2">
+        <div class="fp-dot"></div> Whole Wheat 100%
+      </div>
+
+      <div class="hero-bread-card">
+        <div class="bread-svg-wrap">
+          <!-- Bread SVG illustration -->
+          <svg width="160" height="120" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="80" cy="105" rx="62" ry="10" fill="rgba(0,0,0,0.15)"/>
+            <!-- Loaf body -->
+            <path d="M22 80 Q22 48 80 45 Q138 42 138 72 Q140 92 80 96 Q20 98 22 80Z" fill="#5A7A3A"/>
+            <path d="M25 77 Q25 47 80 44 Q135 41 135 70 Q137 89 80 93 Q23 95 25 77Z" fill="#7A9E5A"/>
+            <!-- Surface scoring -->
+            <path d="M42 65 Q80 56 118 65" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M36 76 Q80 68 124 76" stroke="rgba(255,255,255,0.25)" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <!-- Ear / bloom -->
+            <path d="M75 45 Q68 28 76 18 Q85 8 83 28 Q84 38 79 44Z" fill="#4A6A2C"/>
+            <path d="M77 44 Q71 27 78 17 Q86 9 84 29 Q85 39 80 44Z" fill="#8CB870" opacity="0.5"/>
+            <!-- Seeds on surface -->
+            <ellipse cx="55" cy="72" rx="2" ry="1" fill="rgba(255,255,255,0.35)" transform="rotate(-20 55 72)"/>
+            <ellipse cx="72" cy="67" rx="2" ry="1" fill="rgba(255,255,255,0.35)" transform="rotate(10 72 67)"/>
+            <ellipse cx="90" cy="70" rx="2" ry="1" fill="rgba(255,255,255,0.35)" transform="rotate(-15 90 70)"/>
+            <ellipse cx="108" cy="66" rx="2" ry="1" fill="rgba(255,255,255,0.35)" transform="rotate(5 108 66)"/>
+            <ellipse cx="62" cy="80" rx="2" ry="1" fill="rgba(255,255,255,0.25)" transform="rotate(-10 62 80)"/>
+            <ellipse cx="100" cy="78" rx="2" ry="1" fill="rgba(255,255,255,0.25)" transform="rotate(-5 100 78)"/>
+          </svg>
+        </div>
+        <div class="bread-name">Whole Wheat Loaf</div>
+        <div class="bread-cal">~180 kcal / 2 แผ่น</div>
+        <div class="nutrition-chips">
+          <span class="chip">Fiber สูง</span>
+          <span class="chip">Low GI</span>
+          <span class="chip">No Sugar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><strong>Whole Wheat</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>Multigrain</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>Sourdough</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>Low Sugar</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>High Fiber</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>No Preservatives</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>Gluten-Sensitive Option</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>Whole Wheat</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>Multigrain</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>Sourdough</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>Low Sugar</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>High Fiber</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>No Preservatives</strong> <span class="m-sep">·</span></div>
+    <div class="marquee-item"><strong>Gluten-Sensitive Option</strong> <span class="m-sep">·</span></div>
+  </div>
 </div>
 
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-logo">
-            <img src="assets/name.svg" alt="Logo">
+<!-- WHY -->
+<section class="why reveal" id="about">
+  <div>
+    <div class="section-label">ทำไมต้อง JB's</div>
+    <h2 class="section-title">ขนมปังสุขภาพ<br><em>ที่ไม่ต้องยอม</em><br>กับรสชาติ</h2>
+    <p class="why-body">หลายคนคิดว่าขนมปังสุขภาพต้องหนัก แห้ง และไม่อร่อย แต่ที่ JB's Bakery เราพิสูจน์ให้เห็นว่ามันทำได้ ด้วยสูตรที่พัฒนามากว่า 2 ปี</p>
+    <div class="why-points">
+      <div class="why-point">
+        <div class="point-icon">🌾</div>
+        <div class="point-text">
+          <strong>แป้งธัญพืชเต็มเมล็ด</strong>
+          <p>ใช้ Whole Wheat และ Multigrain ที่ยังคง Bran และ Germ ไว้ครบ ให้ Fiber และสารอาหารสูง</p>
         </div>
-        
-        <div class="footer-section about">
-            <p>ที่ JB's Bakery เราส่งต่อความสุขในทุกคำ <br>ด้วยวัตถุดิบสดใหม่ คุณภาพเยี่ยม และการบริการจากใจ</p>
+      </div>
+      <div class="why-point">
+        <div class="point-icon">🧂</div>
+        <div class="point-text">
+          <strong>ควบคุมโซเดียมและน้ำตาล</strong>
+          <p>ลดน้ำตาลลงกว่า 60% จากขนมปังทั่วไป และใช้เกลือหิมาลัยคุณภาพสูง</p>
         </div>
-        <div class="contact">
-        <div class="contact-row">
-            <a href="https://www.facebook.com/jbsbakeryy" class="contact-icon">
-                <img src="assets/fb.svg" alt="Facebook Icon" class="icon"> 
-            </a>
-            <a href="tel:+66819123533" class="contact-icon">
-                <img src="assets/call.svg" alt="Phone Icon" class="icon">
-            </a>
-            <!-- <a href="tel:+1234567890" class="contact-icon">
-                <img src="assets/line.svg" alt="Line Icon" class="icon">
-            </a> -->
+      </div>
+      <div class="why-point">
+        <div class="point-icon">🔬</div>
+        <div class="point-text">
+          <strong>ส่วนผสมที่อ่านออกทั้งหมด</strong>
+          <p>ไม่มีชื่อสารเคมีที่ออกเสียงไม่ได้ ดูรายการส่วนผสมแล้วรู้จักทุกตัว</p>
         </div>
-        <p>ซอย นนทบุรี 37, ท่าทราย, นนทบุรี 11000, ประเทศไทย</p>
-        </div>
-        
-        <div class="footer-section links">
-            <div class="page-row">
-                <a href="index.html">Home</a>
-                <a href="menu.html">Menu</a>
-                <a href="snackbox.html">Snackbox</a>
-            </div> 
-        </div>
+      </div>
     </div>
-    
-    <!-- <div class="footer-bottom">
-        <p>&copy; 2024 JB's Bakery. All Rights Reserved.</p>
-    </div> -->
-</footer>   
+  </div>
 
+  <div class="why-visual reveal">
+    <div class="why-card">
+      <div class="card-num">0</div>
+      <div class="card-label">สารกันบูด</div>
+      <div class="card-sub">ไม่ใช้ Preservative ใดๆ เลย</div>
+    </div>
+    <div class="why-card">
+      <div class="card-num" style="color:var(--brown)">↓60%</div>
+      <div class="card-label">น้ำตาล</div>
+      <div class="card-sub">น้อยกว่าขนมปังปกติมาก</div>
+    </div>
+    <div class="why-card">
+      <div class="card-num">100%</div>
+      <div class="card-label">Whole Grain</div>
+      <div class="card-sub">ธัญพืชเต็มเมล็ดทุกก้อน</div>
+    </div>
+    <div class="why-card">
+      <div class="card-num" style="color:var(--brown)">สด</div>
+      <div class="card-label">อบทุกวัน</div>
+      <div class="card-sub">ไม่มีสต็อกข้ามวัน</div>
+    </div>
+  </div>
+</section>
 
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-header reveal">
+    <div>
+      <div class="section-label">เมนูขนมปัง</div>
+      <h2 class="section-title">เลือกให้<em>ตรงกับคุณ</em></h2>
+    </div>
+    <a href="#order" class="btn-primary">สั่งจองเลย</a>
+  </div>
+
+  <div class="products-grid">
+
+    <div class="product-card reveal">
+      <div class="product-img">
+        <div class="product-badge-img">Best Seller</div>
+        <svg width="140" height="100" viewBox="0 0 140 100" fill="none">
+          <path d="M18 68 Q18 42 70 40 Q122 38 122 60 Q123 76 70 79 Q17 81 18 68Z" fill="#5A7A3A"/>
+          <path d="M21 66 Q21 42 70 40 Q119 38 119 59 Q120 75 70 77 Q20 79 21 66Z" fill="#7A9E5A"/>
+          <path d="M35 56 Q70 49 105 56" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M67 40 Q62 26 67 17 Q74 9 72 24 Q73 34 69 39Z" fill="#4A6A2C"/>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Whole Wheat Loaf</div>
+        <p class="product-desc">แป้งสาลีโฮลวีทเต็มเมล็ด 100% ไฟเบอร์สูง เนื้อแน่น หนึบนุ่ม รสถั่วอ่อนๆ อิ่มนาน เหมาะทานเป็น Toast เช้า</p>
+        <div class="product-tags">
+          <span class="tag">High Fiber</span>
+          <span class="tag">Low GI</span>
+          <span class="tag">No Sugar</span>
+        </div>
+        <div class="product-footer2">
+          <div class="product-price">฿ 120 <span>/ ก้อนเล็ก</span></div>
+          <button class="add-btn" onclick="this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><polyline points=\'2,8 6,12 14,4\'></polyline></svg>';setTimeout(()=>this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><line x1=\'8\' y1=\'3\' x2=\'8\' y2=\'13\'></line><line x1=\'3\' y1=\'8\' x2=\'13\' y2=\'8\'></line></svg>',1500)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2"><line x1="8" y1="3" x2="8" y2="13"></line><line x1="3" y1="8" x2="13" y2="8"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img oat-bg">
+        <div class="product-badge-img product-badge-new">New</div>
+        <svg width="140" height="100" viewBox="0 0 140 100" fill="none">
+          <path d="M18 68 Q18 42 70 40 Q122 38 122 60 Q123 76 70 79 Q17 81 18 68Z" fill="#8B6842"/>
+          <path d="M21 66 Q21 42 70 40 Q119 38 119 59 Q120 75 70 77 Q20 79 21 66Z" fill="#A07840"/>
+          <path d="M35 56 Q70 49 105 56" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="45" cy="58" rx="2" ry="1" fill="rgba(255,255,255,0.4)" transform="rotate(-20 45 58)"/>
+          <ellipse cx="65" cy="53" rx="2" ry="1" fill="rgba(255,255,255,0.4)" transform="rotate(10 65 53)"/>
+          <ellipse cx="88" cy="57" rx="2" ry="1" fill="rgba(255,255,255,0.4)" transform="rotate(-15 88 57)"/>
+          <ellipse cx="105" cy="52" rx="2" ry="1" fill="rgba(255,255,255,0.4)" transform="rotate(5 105 52)"/>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Oat & Seed Loaf</div>
+        <p class="product-desc">ข้าวโอ๊ตโรลด์ผสมเมล็ดเจีย เมล็ดแฟลกซ์ และงาดำ โอเมก้า 3 สูง เนื้อหนึบอร่อย กลิ่นถั่วหอม เหมาะสำหรับนักออกกำลังกาย</p>
+        <div class="product-tags">
+          <span class="tag">Omega-3</span>
+          <span class="tag">High Protein</span>
+          <span class="tag">Vegan</span>
+        </div>
+        <div class="product-footer2">
+          <div class="product-price">฿ 140 <span>/ ก้อนเล็ก</span></div>
+          <button class="add-btn" onclick="this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><polyline points=\'2,8 6,12 14,4\'></polyline></svg>';setTimeout(()=>this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><line x1=\'8\' y1=\'3\' x2=\'8\' y2=\'13\'></line><line x1=\'3\' y1=\'8\' x2=\'13\' y2=\'8\'></line></svg>',1500)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2"><line x1="8" y1="3" x2="8" y2="13"></line><line x1="3" y1="8" x2="13" y2="8"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img rye-bg">
+        <div class="product-badge-img">Signature</div>
+        <svg width="140" height="100" viewBox="0 0 140 100" fill="none">
+          <path d="M18 68 Q18 42 70 40 Q122 38 122 60 Q123 76 70 79 Q17 81 18 68Z" fill="#4A3828"/>
+          <path d="M21 66 Q21 42 70 40 Q119 38 119 59 Q120 75 70 77 Q20 79 21 66Z" fill="#6A5038"/>
+          <path d="M35 56 Q70 49 105 56" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M30 66 Q70 60 110 66" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <path d="M67 40 Q62 26 67 17 Q74 9 72 24 Q73 34 69 39Z" fill="#3A2A1A"/>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Dark Rye Sourdough</div>
+        <p class="product-desc">ไรย์เข้มข้น หมักธรรมชาติ 24 ชั่วโมง ดัชนีน้ำตาลต่ำที่สุดในเมนู เหมาะสำหรับผู้ควบคุมน้ำตาลในเลือด</p>
+        <div class="product-tags">
+          <span class="tag">Very Low GI</span>
+          <span class="tag">Probiotic</span>
+          <span class="tag">No Added Sugar</span>
+        </div>
+        <div class="product-footer2">
+          <div class="product-price">฿ 160 <span>/ ก้อนเล็ก</span></div>
+          <button class="add-btn" onclick="this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><polyline points=\'2,8 6,12 14,4\'></polyline></svg>';setTimeout(()=>this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><line x1=\'8\' y1=\'3\' x2=\'8\' y2=\'13\'></line><line x1=\'3\' y1=\'8\' x2=\'13\' y2=\'8\'></line></svg>',1500)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2"><line x1="8" y1="3" x2="8" y2="13"></line><line x1="3" y1="8" x2="13" y2="8"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img herb-bg">
+        <div class="product-badge-img">Popular</div>
+        <svg width="140" height="100" viewBox="0 0 140 100" fill="none">
+          <path d="M22 68 Q22 44 70 42 Q118 40 118 62 Q119 77 70 80 Q21 82 22 68Z" fill="#4A6A3A"/>
+          <path d="M25 66 Q25 44 70 42 Q115 40 115 61 Q116 76 70 78 Q24 80 25 66Z" fill="#6A8A5A"/>
+          <circle cx="45" cy="57" r="3" fill="#3A5A2A" opacity="0.7"/>
+          <circle cx="65" cy="52" r="2.5" fill="#3A5A2A" opacity="0.7"/>
+          <circle cx="85" cy="55" r="3" fill="#3A5A2A" opacity="0.7"/>
+          <circle cx="105" cy="51" r="2" fill="#3A5A2A" opacity="0.7"/>
+          <circle cx="55" cy="65" r="2" fill="#3A5A2A" opacity="0.5"/>
+          <circle cx="95" cy="63" r="2.5" fill="#3A5A2A" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Herb & Olive Oil</div>
+        <p class="product-desc">โรสแมรีและออริกาโนสดๆ ผสมน้ำมันมะกอก Extra Virgin รสกลมกล่อม หอมสมุนไพร ไม่ใส่เนยหรือนม เหมาะสำหรับ Lactose-free</p>
+        <div class="product-tags">
+          <span class="tag">Dairy-Free</span>
+          <span class="tag">Antioxidant</span>
+          <span class="tag">Vegan</span>
+        </div>
+        <div class="product-footer2">
+          <div class="product-price">฿ 150 <span>/ ก้อนเล็ก</span></div>
+          <button class="add-btn" onclick="this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><polyline points=\'2,8 6,12 14,4\'></polyline></svg>';setTimeout(()=>this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><line x1=\'8\' y1=\'3\' x2=\'8\' y2=\'13\'></line><line x1=\'3\' y1=\'8\' x2=\'13\' y2=\'8\'></line></svg>',1500)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2"><line x1="8" y1="3" x2="8" y2="13"></line><line x1="3" y1="8" x2="13" y2="8"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img seed-bg">
+        <div class="product-badge-img">Keto-Friendly</div>
+        <svg width="140" height="100" viewBox="0 0 140 100" fill="none">
+          <rect x="22" y="42" width="96" height="38" rx="10" fill="#7A6A5A"/>
+          <rect x="24" y="44" width="92" height="34" rx="9" fill="#9A8A72"/>
+          <path d="M35 57 Q70 51 105 57" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="48" cy="62" rx="2" ry="1" fill="rgba(255,255,255,0.5)" transform="rotate(-15 48 62)"/>
+          <ellipse cx="70" cy="58" rx="2" ry="1" fill="rgba(255,255,255,0.5)" transform="rotate(10 70 58)"/>
+          <ellipse cx="92" cy="62" rx="2" ry="1" fill="rgba(255,255,255,0.5)" transform="rotate(-10 92 62)"/>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Seed & Nut Loaf</div>
+        <p class="product-desc">เมล็ดทานตะวัน วอลนัท อัลมอนด์ เฮมป์ซีด คาร์โบไฮเดรตต่ำมาก เหมาะสำหรับคนทำ Keto หรือ Low-Carb</p>
+        <div class="product-tags">
+          <span class="tag">Low Carb</span>
+          <span class="tag">High Protein</span>
+          <span class="tag">Keto OK</span>
+        </div>
+        <div class="product-footer2">
+          <div class="product-price">฿ 180 <span>/ ก้อนเล็ก</span></div>
+          <button class="add-btn" onclick="this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><polyline points=\'2,8 6,12 14,4\'></polyline></svg>';setTimeout(()=>this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><line x1=\'8\' y1=\'3\' x2=\'8\' y2=\'13\'></line><line x1=\'3\' y1=\'8\' x2=\'13\' y2=\'8\'></line></svg>',1500)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2"><line x1="8" y1="3" x2="8" y2="13"></line><line x1="3" y1="8" x2="13" y2="8"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-img rice-bg">
+        <div class="product-badge-img product-badge-new">Thai Special</div>
+        <svg width="140" height="100" viewBox="0 0 140 100" fill="none">
+          <path d="M18 68 Q18 42 70 40 Q122 38 122 60 Q123 76 70 79 Q17 81 18 68Z" fill="#4A6A3A" opacity="0.8"/>
+          <path d="M21 66 Q21 42 70 40 Q119 38 119 59 Q120 75 70 77 Q20 79 21 66Z" fill="#6A8A5A"/>
+          <path d="M35 56 Q70 49 105 56" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M67 40 Q62 26 67 17 Q74 9 72 24 Q73 34 69 39Z" fill="#3A5A2A"/>
+          <rect x="48" y="60" width="6" height="10" rx="1" fill="rgba(180,220,180,0.4)"/>
+          <rect x="62" y="56" width="6" height="12" rx="1" fill="rgba(180,220,180,0.4)"/>
+          <rect x="76" y="60" width="6" height="10" rx="1" fill="rgba(180,220,180,0.4)"/>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-name">Brown Rice Bread</div>
+        <p class="product-desc">แป้งข้าวกล้องไทยผสมแป้งสาลีโฮลวีท ไม่มีกลูเตนจากข้าวสาลีเกิน 50% เหมาะสำหรับผู้แพ้กลูเตนเล็กน้อย กลิ่นหอมข้าว</p>
+        <div class="product-tags">
+          <span class="tag">Thai Grain</span>
+          <span class="tag">Low Gluten</span>
+          <span class="tag">GF-Sensitive</span>
+        </div>
+        <div class="product-footer2">
+          <div class="product-price">฿ 145 <span>/ ก้อนเล็ก</span></div>
+          <button class="add-btn" onclick="this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><polyline points=\'2,8 6,12 14,4\'></polyline></svg>';setTimeout(()=>this.innerHTML='<svg viewBox=\'0 0 16 16\' fill=\'none\' stroke=\'white\' stroke-width=\'2\'><line x1=\'8\' y1=\'3\' x2=\'8\' y2=\'13\'></line><line x1=\'3\' y1=\'8\' x2=\'13\' y2=\'8\'></line></svg>',1500)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2"><line x1="8" y1="3" x2="8" y2="13"></line><line x1="3" y1="8" x2="13" y2="8"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INGREDIENTS -->
+<section class="ingredient-banner reveal" id="ingredients">
+  <div>
+    <div class="section-label ib-label">วัตถุดิบ</div>
+    <h2 class="section-title ib-title">ส่วนผสม<em>ที่อ่านออก</em><br>ทั้งหมด</h2>
+    <p class="ib-body">เราเชื่อว่าคุณควรรู้ว่าอยู่ในขนมปังของคุณมีอะไรบ้าง ส่วนผสมทุกตัวของเราเป็นชื่อที่คุณรู้จักและหาได้ในครัว ไม่มีรหัสสารเคมี ไม่มีสิ่งที่ต้องซ่อน</p>
+  </div>
+
+  <div class="ingredient-grid">
+    <div class="ing-item">
+      <div class="ing-emoji">🌾</div>
+      <div>
+        <div class="ing-name">Whole Wheat Flour</div>
+        <div class="ing-sub">แป้งสาลีเต็มเมล็ด คัดสรร</div>
+      </div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-emoji">💧</div>
+      <div>
+        <div class="ing-name">Filtered Water</div>
+        <div class="ing-sub">น้ำกรองบริสุทธิ์</div>
+      </div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-emoji">🧂</div>
+      <div>
+        <div class="ing-name">Himalayan Salt</div>
+        <div class="ing-sub">เกลือหิมาลัยสีชมพู</div>
+      </div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-emoji">🌿</div>
+      <div>
+        <div class="ing-name">Sourdough Starter</div>
+        <div class="ing-sub">ยีสต์ป่าธรรมชาติ 100%</div>
+      </div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-emoji">🫒</div>
+      <div>
+        <div class="ing-name">Extra Virgin Olive Oil</div>
+        <div class="ing-sub">น้ำมันมะกอกบริสุทธิ์ (บางสูตร)</div>
+      </div>
+    </div>
+    <div class="ing-item">
+      <div class="ing-emoji">🌻</div>
+      <div>
+        <div class="ing-name">Mixed Seeds & Nuts</div>
+        <div class="ing-sub">เมล็ดธัญพืชและถั่ว (บางสูตร)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="order-section" id="order">
+  <div class="reveal" style="text-align:center; max-width:500px; margin:0 auto 0.5rem;">
+    <div class="section-label" style="justify-content:center">สั่งจอง</div>
+    <h2 class="section-title">สั่งได้ง่ายๆ<br><em>ส่งถึงบ้านนนทบุรี</em></h2>
+  </div>
+
+  <div class="order-grid">
+    <div class="order-steps reveal">
+      <div class="order-step">
+        <div class="step-circle">1</div>
+        <div class="step-content">
+          <strong>เลือกเมนูและจำนวน</strong>
+          <p>กรอกฟอร์มด้านขวา หรือทัก Facebook Page ก็ได้เช่นกัน รับออเดอร์ทุกวัน จ–ศ ก่อน 17:00 น.</p>
+        </div>
+      </div>
+      <div class="order-step">
+        <div class="step-circle">2</div>
+        <div class="step-content">
+          <strong>ยืนยันและชำระเงิน</strong>
+          <p>รับการยืนยันทาง Facebook/เบอร์โทร ชำระผ่าน PromptPay ได้เลย ภายใน 24 ชม.</p>
+        </div>
+      </div>
+      <div class="order-step">
+        <div class="step-circle">3</div>
+        <div class="step-content">
+          <strong>รับขนมปังสดใหม่</strong>
+          <p>รับหน้าร้านซอย นนทบุรี 37 หรือจัดส่งในพื้นที่นนทบุรีและปริมณฑล ขั้นต่ำ 2 ก้อนขึ้นไป</p>
+        </div>
+      </div>
+      <div style="padding: 1.5rem; background: var(--mint); border-radius: 16px; margin-top: 1rem;">
+        <p style="font-size:0.85rem; color:var(--forest); font-weight:500; margin-bottom:0.5rem;">📍 หน้าร้าน</p>
+        <p style="font-size:0.82rem; color:var(--muted); line-height:1.7;">ซอย นนทบุรี 37, ท่าทราย<br>นนทบุรี 11000<br>โทร: <a href="tel:+66819123533" style="color:var(--moss); text-decoration:none; font-weight:500">081-912-3533</a></p>
+      </div>
+    </div>
+
+    <div class="order-form-wrap reveal">
+      <div class="form-title">สั่งจองขนมปัง</div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>ชื่อ</label>
+          <input type="text" placeholder="ชื่อของคุณ">
+        </div>
+        <div class="form-field">
+          <label>เบอร์โทร</label>
+          <input type="tel" placeholder="08X-XXX-XXXX">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>เมนูที่ต้องการ</label>
+        <select>
+          <option>Whole Wheat Loaf — ฿120</option>
+          <option>Oat & Seed Loaf — ฿140</option>
+          <option>Dark Rye Sourdough — ฿160</option>
+          <option>Herb & Olive Oil — ฿150</option>
+          <option>Seed & Nut Loaf — ฿180</option>
+          <option>Brown Rice Bread — ฿145</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>จำนวน</label>
+          <select>
+            <option>2 ก้อน (ขั้นต่ำ)</option>
+            <option>3 ก้อน</option>
+            <option>4 ก้อน</option>
+            <option>5+ ก้อน</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>วิธีรับ</label>
+          <select>
+            <option>รับหน้าร้าน</option>
+            <option>จัดส่งนนทบุรี (+฿50)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>วันและเวลาที่ต้องการ</label>
+        <input type="text" placeholder="เช่น พรุ่งนี้ 10:00-12:00 น.">
+      </div>
+      <div class="form-field">
+        <label>ข้อความเพิ่มเติม / อาหารที่แพ้</label>
+        <textarea placeholder="แจ้งอาหารที่แพ้ หรือคำขอพิเศษ..."></textarea>
+      </div>
+      <button class="form-submit-btn" id="submitBtn">ส่งใบจอง →</button>
+      <div class="line-contact">
+        <span>หรือสั่งผ่าน</span>
+        <span class="line-badge">Facebook</span>
+        <a href="https://www.facebook.com/jbsbakeryy" target="_blank" style="color:var(--moss); font-size:0.8rem; text-decoration:none; font-weight:500">@jbsbakeryy</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="reveal" style="text-align:center; max-width:420px; margin:0 auto;">
+    <div class="section-label" style="justify-content:center">รีวิว</div>
+    <h2 class="section-title">ลูกค้า<em>รักสุขภาพ</em><br>พูดถึงเรา</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Dark Rye อร่อยมากเลย เพิ่งเริ่มคุมน้ำตาล หมอบอกให้หาขนมปัง Low GI ลองแล้วติดใจ ทานเป็น Toast กับไข่ต้มทุกเช้า</p>
+      <div class="reviewer">
+        <div class="reviewer-av av-a">ก</div>
+        <div>
+          <div class="reviewer-name">กัลยา ท.</div>
+          <div class="reviewer-loc">ลูกค้าประจำ · นนทบุรี</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Oat & Seed อิ่มมากกกก ทานแค่ 2 แผ่นอิ่มยันเที่ยง กำลังลดน้ำหนักอยู่ เจอขนมปังเพื่อสุขภาพที่อร่อยมากที่สุดแล้ว</p>
+      <div class="reviewer">
+        <div class="reviewer-av av-b">ป</div>
+        <div>
+          <div class="reviewer-name">ปิยะ ส.</div>
+          <div class="reviewer-loc">ลูกค้าใหม่ · บางใหญ่</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">ลูกแพ้นม สั่ง Herb & Olive Oil มา เนื้อหนึบอร่อยมาก ไม่มีเนย ไม่มีนม กลิ่นโรสแมรีหอมมาก ลูกชอบมาก สั่งทุกอาทิตย์เลย</p>
+      <div class="reviewer">
+        <div class="reviewer-av av-c">ม</div>
+        <div>
+          <div class="reviewer-name">มาลี ว.</div>
+          <div class="reviewer-loc">คุณแม่ลูกสอง · ปากเกร็ด</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="#" class="footer-brand-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round">
+            <path d="M6 20c0-4.4 2.7-8 6-8s6 3.6 6 8"/>
+            <path d="M12 12V7"/>
+            <path d="M9 9.5C9 7.6 10.3 6 12 6s3 1.6 3 3.5"/>
+            <circle cx="12" cy="5" r="1.5" fill="#fff" stroke="none"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          JB's Bakery
+          <span>Healthy Bread</span>
+        </div>
+      </a>
+      <p class="footer-tagline">ขนมปังเพื่อสุขภาพโฮมเมด ไม่ใส่สารกันบูด แป้งธัญพืชเต็มเมล็ด อบสดทุกวัน ส่งพื้นที่นนทบุรี</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/jbsbakeryy" target="_blank" class="social-btn" title="Facebook">fb</a>
+        <a href="tel:+66819123533" class="social-btn" title="โทรศัพท์">☎</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>เมนู</h4>
+      <ul>
+        <li><a href="#">Whole Wheat Loaf</a></li>
+        <li><a href="#">Oat & Seed Loaf</a></li>
+        <li><a href="#">Dark Rye Sourdough</a></li>
+        <li><a href="#">Herb & Olive Oil</a></li>
+        <li><a href="#">Seed & Nut Loaf</a></li>
+        <li><a href="#">Brown Rice Bread</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>ข้อมูล</h4>
+      <ul>
+        <li><a href="#">เกี่ยวกับเรา</a></li>
+        <li><a href="#">วิธีเก็บขนมปัง</a></li>
+        <li><a href="#">FAQ สุขภาพ</a></li>
+        <li><a href="#">สั่งจอง</a></li>
+        <li><a href="tel:+66819123533">081-912-3533</a></li>
+        <li><a href="#">ซอย นนทบุรี 37</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 JB's Bakery · Healthy Bread · นนทบุรี ประเทศไทย</p>
+    <p>Made with 🌾 Love & No Preservatives</p>
+  </div>
+</footer>
+
+<script>
+// Scroll nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Form submit
+document.getElementById('submitBtn').addEventListener('click', function() {
+  this.textContent = '✓ ส่งแล้ว! รอการยืนยันทาง Facebook';
+  this.style.background = '#3D5A3E';
+  setTimeout(() => {
+    this.textContent = 'ส่งใบจอง →';
+    this.style.background = '';
+  }, 3000);
+});
+</script>
 </body>
- 
-
 </html>
